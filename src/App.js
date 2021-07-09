@@ -12,10 +12,12 @@ import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Zoom from '@material-ui/core/Zoom';
 import Button from '@material-ui/core/Button';
+import  Grid  from '@material-ui/core/Grid/Grid';
 import { withTheme } from "./theme";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import { useTheme } from "@material-ui/core/styles";
+import Home from './container/home';
 import './App.scss'
 
 const useStyles = makeStyles((theme) => ({
@@ -70,39 +72,35 @@ ScrollTop.propTypes = {
 
 function App(props) {
   const classes = useStyles();
-  const { LightMode, setLightMode } = props;
+  const { DarkMode, setDarkMode } = props;
   const theme = useTheme();
   return (
     <ThemeProvider theme={theme}>
       <React.Fragment>
       <CssBaseline />
       <AppBar>
-      <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            News
+      <Toolbar >
+      <Container className='d-flex justify-content-between align-items-center'>
+           <Typography variant="h6" className={classes.title}>
+            Where in the world?
           </Typography>
           <FormControlLabel
           control={
             <Switch
-              checked={LightMode}
-              onChange={() => setLightMode(!LightMode)}
+              checked={DarkMode}
+              onChange={() => setDarkMode(!DarkMode)}
             />
           }
           label="Dark Mode"
         />
+      </Container>
+         
         </Toolbar>
       </AppBar>
       <Toolbar id="back-to-top-anchor" />
       <Container>
-        <Box my={2}>
-          {[...new Array(12)]
-            .map(
-              () => `Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
-            )
-            .join('\n')}
+        <Box m={2}>
+          <Home/>
         </Box>
       </Container>
       <ScrollTop {...props}>

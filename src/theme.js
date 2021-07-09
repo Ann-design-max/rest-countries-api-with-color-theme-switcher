@@ -7,36 +7,28 @@ import { CssBaseline } from "@material-ui/core";
 const theme = createMuiTheme();
 const themeLight = createMuiTheme({
   typography: {
-    fontFamily: 'Poppins, sans-serif',
-    h1:{
-      fontSize: '1.5rem',
+    fontFamily: 'Nunito Sans, sans-serif',
+    h6:{
+        fontSize: '1.2rem',
+        fontWeight:'800',
+    },
+    body1:{
+      fontSize: '0.9rem',
       fontWeight:'600',
-      '@media (min-width:600px)': {
-      fontSize: '1.5rem',
-      },
-      [theme.breakpoints.up('md')]: {
-      fontSize: '3.4rem',
-      },
   },
-  h3:{
-      fontSize: '1.0rem',
-      fontWeight:'300',
-      '@media (min-width:600px)': {
-      fontSize: '1.0rem',
-      },
-      [theme.breakpoints.up('md')]: {
-      fontSize: '2.0rem',
-      },
-  }
+    body2:{
+        fontSize: '0.9rem',
+        fontWeight:'300',
+    }
   },
   
   palette: {
     type: "light", 
      background:{
-       default:'#F1F8FE',
-       paper:"#F1F8FE"},
+       default:'hsl(0, 0%, 98%)',
+       paper:"hsl(0, 0%, 98%)"},
     primary:{
-      main:'#F1F8FE',
+      main:'hsl(0, 0%, 100%)',
     },
     secondary:{
       main:'#F8B630',
@@ -46,37 +38,29 @@ const themeLight = createMuiTheme({
 
 const themeDark = createMuiTheme({
   typography: {
-    fontFamily: 'Poppins, sans-serif',
-    h1:{
-        fontSize: '1.5rem',
-        fontWeight:'600',
-        '@media (min-width:600px)': {
-        fontSize: '1.5rem',
-        },
-        [theme.breakpoints.up('md')]: {
-        fontSize: '3.4rem',
-        },
+    fontFamily: 'Nunito Sans, sans-serif',
+    h6:{
+        fontSize: '1.2rem',
+        fontWeight:'800',
     },
-    h3:{
-        fontSize: '1.0rem',
+    body1:{
+      fontSize: '0.9rem',
+      fontWeight:'600',
+  },
+    body2:{
+        fontSize: '0.9rem',
         fontWeight:'300',
-        '@media (min-width:600px)': {
-        fontSize: '1.0rem',
-        },
-        [theme.breakpoints.up('md')]: {
-        fontSize: '2.0rem',
-        },
     }
   },
-  
+
   palette: {
     type: "dark",
     background:{
-      default:"#001625",
-      paper:"#032338"
+      default:"hsl(207, 26%, 17%)",
+      paper:"hsl(207, 26%, 17%)"
     },
     primary:{
-      main:'#001625',
+      main:'hsl(209, 23%, 22%)',
     },
     secondary:{
       main:'#FFCD67',
@@ -85,8 +69,8 @@ const themeDark = createMuiTheme({
 });
 
 const Theme = (props) => {
-    const { children, LightMode } = props;
-    const defaultTheme = LightMode ? themeLight : themeDark;
+    const { children, DarkMode } = props;
+    const defaultTheme = DarkMode ? themeDark : themeLight;
     return (
       <ThemeProvider theme={defaultTheme}>
         <CssBaseline />
@@ -97,10 +81,10 @@ const Theme = (props) => {
 
   export const withTheme = (Component) => {
     return (props) => {
-      const [LightMode, setLightMode] = useState( "LightMode", false);
+      const [DarkMode, setDarkMode] = useState( "DarkMode", true);
       return (
-        <Theme LightMode={LightMode}>
-          <Component {...props} LightMode={LightMode} setDarkMode={setLightMode} />
+        <Theme DarkMode={DarkMode}>
+          <Component {...props} DarkMode={DarkMode} setDarkMode={setDarkMode} />
         </Theme>
       );
     };
